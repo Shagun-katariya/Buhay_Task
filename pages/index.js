@@ -16,7 +16,7 @@ const CategoryList = lazy(() => import("../components/CategoryList.jsx"));
 function App() {
   const [categories, setCategories] = useState([]);
   const [showLanding, setShowLanding] = useState(true);
-  // State to control visibility of Landing
+  // State to control visibility of Landing page
 
   //Using useCallback for Memoization
   const addCategory = useCallback(() => {
@@ -34,7 +34,7 @@ function App() {
     const newCategory = { id: Date.now(), name: "", requirements: [] };
     setCategories((prevCategories) => [...prevCategories, newCategory]);
     toast.success("Category Added!");
-  }, [categories, setCategories]);
+  }, [categories]);
 
   //useEffect for updating the Landing state value
   useEffect(() => {
