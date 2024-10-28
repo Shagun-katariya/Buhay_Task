@@ -39,6 +39,8 @@ function CategoryList({ categories = [], setCategories }) {
                 requirements: [
                   ...category.requirements,
                   { id: Date.now(), name: requirementName },
+                  //for nested subrequirements
+                  //const newRequirement = { id: Date.now(), name: requirementName, subRequirements: [] };
                 ],
               }
             : category
@@ -48,6 +50,40 @@ function CategoryList({ categories = [], setCategories }) {
     },
     [setCategories]
   );
+
+  //for nested requirements
+  // const addRequirement = useCallback(
+  //   (categoryId, requirementName, parentRequirementId = null) => {
+  //     setCategories((prevCategories) =>
+  //       prevCategories.map((category) => {
+  //         if (category.id !== categoryId) return category;
+  
+  //         const addNestedRequirement = (requirements) =>
+  //           requirements.map((req) =>
+  //             req.id === parentRequirementId
+  //               ? {
+  //                   ...req,
+  //                   subRequirements: [
+  //                     ...req.subRequirements,
+  //                     { id: Date.now(), name: requirementName, subRequirements: [] },
+  //                   ],
+  //                 }
+  //               : { ...req, subRequirements: addNestedRequirement(req.subRequirements) }
+  //           );
+  
+  //         return {
+  //           ...category,
+  //           requirements: parentRequirementId
+  //             ? addNestedRequirement(category.requirements)
+  //             : [...category.requirements, { id: Date.now(), name: requirementName, subRequirements: [] }],
+  //         };
+  //       })
+  //     );
+  //     toast.success("Requirement Added!");
+  //   },
+  //   [setCategories]
+  // );
+  
 
   //removing requirement
   const removeRequirement = useCallback(
@@ -68,6 +104,33 @@ function CategoryList({ categories = [], setCategories }) {
     },
     [setCategories]
   );
+
+  //remove nested requirement
+  // const removeRequirement = useCallback(
+  //   (categoryId, requirementId) => {
+  //     const removeNestedRequirement = (requirements) =>
+  //       requirements
+  //         .filter((req) => req.id !== requirementId)
+  //         .map((req) => ({
+  //           ...req,
+  //           subRequirements: removeNestedRequirement(req.subRequirements),
+  //         }));
+  
+  //     setCategories((prevCategories) =>
+  //       prevCategories.map((category) =>
+  //         category.id === categoryId
+  //           ? {
+  //               ...category,
+  //               requirements: removeNestedRequirement(category.requirements),
+  //             }
+  //           : category
+  //       )
+  //     );
+  //     toast.success("Requirement Deleted!");
+  //   },
+  //   [setCategories]
+  // );
+  
 
   return (
     <div className={styles.category__list}>
