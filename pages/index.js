@@ -48,37 +48,38 @@ function App() {
   return (
     <div className={styles.app}>
       <ToastContainer position="top-right" autoClose={3000} />
-      <Landing show={showLanding} />
-      <div
-        className={`${styles.app__content} ${
-          showLanding ? styles.loading : styles.loaded
-        }`}
-      >
-        <div className={styles.app__header}>
-          <h1>Requirement Submission List</h1>
-        </div>
-        <div className={styles.app__body}>
-          <div className={styles.app__controls}>
-            <button onClick={addCategory}>Add Category</button>
+      {/* Render the Landing component */}
+      {showLanding ? (
+        <Landing show={showLanding} />
+      ) : (
+        // Render the rest of the components only when showLanding is false
+        <div className={styles.app__content}>
+          <div className={styles.app__header}>
+            <h1>Requirement Submission List</h1>
           </div>
-          <div className={styles.app__content1}>
-            <Suspense fallback={<div>Loading...</div>}>
-              {categories && categories.length > 0 ? (
-                <CategoryList
-                  categories={categories}
-                  setCategories={setCategories}
-                />
-              ) : (
-                <div className={styles.no__categories}>
-                  <i className="fas fa-box-open"></i>
-                  <p>No Categories Added</p>
-                </div>
-              )}
-              <CategoryPreview categories={categories} />
-            </Suspense>
+          <div className={styles.app__body}>
+            <div className={styles.app__controls}>
+              <button onClick={addCategory}>Add Category</button>
+            </div>
+            <div className={styles.app__content1}>
+              <Suspense fallback={<div>Loading...</div>}>
+                {categories && categories.length > 0 ? (
+                  <CategoryList
+                    categories={categories}
+                    setCategories={setCategories}
+                  />
+                ) : (
+                  <div className={styles.no__categories}>
+                    <i className="fas fa-box-open"></i>
+                    <p>No Categories Added</p>
+                  </div>
+                )}
+                <CategoryPreview categories={categories} />
+              </Suspense>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
