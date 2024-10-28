@@ -17,6 +17,7 @@ function Category({
     import("react-toastify/dist/ReactToastify.css");
   }, []);
 
+  //update accordingly with nested requirements
   const handleAddRequirement = useCallback(() => {
     const trimmedRequirement = requirementName.trim();
     const trimmedCategoryName = category.name.trim();
